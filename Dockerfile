@@ -15,6 +15,12 @@ RUN apt-get update -y && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev 
+    
+#install some base extensions
+RUN apt-get install -y \
+    libzip-dev \
+    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-install zip
 
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
